@@ -18,7 +18,6 @@ $(document).ready(function () {
   $("#hour-17.description").val(localStorage.getItem("hour-17"));
 
   //Save button event listener
-
   $(".saveBtn").on("click", function () {
 
     console.log(this);
@@ -27,10 +26,14 @@ $(document).ready(function () {
     var description = $(this).siblings(".description").val();
 
     localStorage.setItem(id, description);
-
   });
 
-  //Function assigning color
+  function saveDescription (d) {
+    if (!localStorage.getItem(d)) {
+        return "empty";
+    }
+    return localStorage.getItem(d);
+  }
 
   function colorbars() {
     var currentHour = dayjs().hour();
@@ -51,8 +54,10 @@ $(document).ready(function () {
         $(this).removeClass("past");
         $(this).addClass("future");
       }
-      console.log( IdHour, currentHour)
+      console.log(IdHour, currentHour)
     })
   }
+
+  saveDescription();
   colorbars();
 });
